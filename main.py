@@ -1,3 +1,196 @@
+def searchstudent():
+    print('student searched')
+    def search():
+        id = idval.get()
+        name = nameval.get()
+        mobile = mobileval.get()
+        email = emailval.get()
+        gender = genderval.get()
+        address = addressval.get()
+        dob = dobval.get()
+        addeddate = time.strftime("%d/%m/%Y")
+        if (id != ''):
+
+            strr = 'select * from studentdata where id=%s'
+            mycursor.execute(strr, (id))
+            datas = mycursor.fetchall()
+            studenttable.delete(*studenttable.get_children())
+            for i in datas:
+                vv = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]]
+                print(vv)
+                studenttable.insert('', END, values=vv)
+
+
+        elif (name != ''):
+
+            strr = 'select * from studentdata where name=%s'
+            mycursor.execute(strr,(name))
+            datas = mycursor.fetchall()
+            studenttable.delete(*studenttable.get_children())
+            for i in datas:
+                vv = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]]
+                print(vv)
+                studenttable.insert('', END, values=vv)
+
+        elif (mobile != ''):
+
+            strr = 'select * from studentdata where mobile=%s'
+            mycursor.execute(strr, (mobile))
+            datas = mycursor.fetchall()
+            studenttable.delete(*studenttable.get_children())
+            for i in datas:
+                vv = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]]
+                print(vv)
+                studenttable.insert('', END, values=vv)
+
+        elif (email != ''):
+
+            strr = 'select * from studentdata where email=%s'
+            mycursor.execute(strr, (email))
+            datas = mycursor.fetchall()
+            studenttable.delete(*studenttable.get_children())
+            for i in datas:
+                vv = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]]
+                print(vv)
+                studenttable.insert('', END, values=vv)
+
+        elif (address != ''):
+
+            strr = 'select * from studentdata where address=%s'
+            mycursor.execute(strr, (address))
+            datas = mycursor.fetchall()
+            studenttable.delete(*studenttable.get_children())
+            for i in datas:
+                vv = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]]
+                print(vv)
+                studenttable.insert('', END, values=vv)
+
+        elif (gender != ''):
+
+            strr = 'select * from studentdata where gender=%s'
+            mycursor.execute(strr, (gender))
+            datas = mycursor.fetchall()
+            studenttable.delete(*studenttable.get_children())
+            for i in datas:
+                vv = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]]
+                print(vv)
+                studenttable.insert('', END, values=vv)
+
+        elif (dob != ''):
+
+            strr = 'select * from studentdata where dob=%s'
+            mycursor.execute(strr, (dob))
+            datas = mycursor.fetchall()
+            studenttable.delete(*studenttable.get_children())
+            for i in datas:
+                vv = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]]
+                print(vv)
+                studenttable.insert('', END, values=vv)
+
+        elif (addeddate != ''):
+
+            strr = 'select * from studentdata where addeddate=%s'
+            mycursor.execute(strr, (addeddate))
+            datas = mycursor.fetchall()
+            studenttable.delete(*studenttable.get_children())
+            for i in datas:
+                vv = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]]
+                print(vv)
+                studenttable.insert('', END, values=vv)
+
+
+
+
+
+
+    searchroot = Toplevel(master=DataEntryFrame)
+    searchroot.grab_set()
+    searchroot.geometry('600x600+220+50')
+    searchroot.title('Student Management System')
+    searchroot.iconbitmap('student.ico')
+    searchroot.resizable(False, False)
+    searchroot.config(bg='sienna3')
+    #--------------------------------------------Add search lables---------------------#####
+
+
+
+
+    idlabel = Label(searchroot, text='Enter ID:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                    borderwidth=3
+                    , width=12, anchor='w')
+    idlabel.place(x=10, y=10)
+
+    namelabel = Label(searchroot, text='Enter Name:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                      borderwidth=3, width=12, anchor='w')
+    namelabel.place(x=10, y=70)
+
+    mobilelabel = Label(searchroot, text='Enter Mobile:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                        borderwidth=3, width=12, anchor='w')
+    mobilelabel.place(x=10, y=130)
+
+    emaillabel = Label(searchroot, text='Enter Email:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                       borderwidth=3, width=12, anchor='w')
+    emaillabel.place(x=10, y=190)
+
+    addresslabel = Label(searchroot, text='Enter Address:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                         borderwidth=3, width=12, anchor='w')
+    addresslabel.place(x=10, y=250)
+
+    genderlabel = Label(searchroot, text='Enter Gender:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                        borderwidth=3, width=12, anchor='w')
+    genderlabel.place(x=10, y=310)
+
+    doblabel = Label(searchroot, text='Enter D.O.B:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                     borderwidth=3, width=12, anchor='w')
+    doblabel.place(x=10, y=370)
+
+    datelabel = Label(searchroot, text='Enter Date:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                     borderwidth=3, width=12, anchor='w')
+    datelabel.place(x=10, y=430)
+
+
+    # -------------------------------------------------------------Add student entry------------#######
+    idval = StringVar()
+    nameval = StringVar()
+    mobileval = StringVar()
+    emailval = StringVar()
+    genderval = StringVar()
+    addressval = StringVar()
+    dobval = StringVar()
+    dateval = StringVar()
+
+    identry = Entry(searchroot, font=('Big Caslon', 20, 'bold'), bd=5, text=idval)
+    identry.place(x=250, y=10)
+
+    nameentry = Entry(searchroot, font=('Big Caslon', 20, 'bold'), bd=5, text=nameval)
+    nameentry.place(x=250, y=70)
+
+    mobileentry = Entry(searchroot, font=('Big Caslon', 20, 'bold'), bd=5, text=mobileval)
+    mobileentry.place(x=250, y=130)
+
+    emailentry = Entry(searchroot, font=('Big Caslon', 20, 'bold'), bd=5, text=emailval)
+    emailentry.place(x=250, y=190)
+
+    addressentry = Entry(searchroot, font=('Big Caslon', 20, 'bold'), bd=5, text=addressval)
+    addressentry.place(x=250, y=250)
+
+    genderentry = Entry(searchroot, font=('Big Caslon', 20, 'bold'), bd=5, text=genderval)
+    genderentry.place(x=250, y=310)
+
+    dobentry = Entry(searchroot, font=('Big Caslon', 20, 'bold'), bd=5, text=dobval)
+    dobentry.place(x=250, y=370)
+
+    dateentry = Entry(searchroot, font=('Big Caslon', 20, 'bold'), bd=5, text=dateval)
+    dateentry.place(x=250, y=430)
+    # _______________________________________________________Add button--_________________________#
+
+    submitbtn = Button(searchroot, text='Submit', relief=GROOVE, bd=5, font=('Big Caslon', 20, 'bold'), width=10,
+                       fg='black', bg='skyblue', activeforeground='white', activebackground='gold',
+                       command=search)
+    submitbtn.place(x=250, y=500)
+
+    searchroot.mainloop()
+
 def deletestudent():
     cc = studenttable.focus()
     content = studenttable.item(cc)
