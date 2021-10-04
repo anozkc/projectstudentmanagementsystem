@@ -1,3 +1,21 @@
+def deletestudent():
+    cc = studenttable.focus()
+    content = studenttable.item(cc)
+    pp = content['values'][0]
+    strr = 'delete from studentdata where id=%s'
+    mycursor.execute(strr,(pp))
+    con.commit()
+    messagebox.showinfo('Notification', 'ID {} deleted succesfully'.format(pp))
+    strr = 'select * from studentdata'
+    mycursor.execute(strr)
+    datas = mycursor.fetchall()
+    studenttable.delete(*studenttable.get_children())
+    for i in datas:
+        vv = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]]
+        print(vv)
+        studenttable.insert('', END, values=vv)
+
+
 def updatestudent():
     def update():
           id = idval.get()
