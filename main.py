@@ -1,5 +1,21 @@
 
 
+def exportall():
+    ff = filedialog.asksaveasfilename()
+    gg = studenttable.get_children()
+    id, name, mobile, email, address, gender, dob, addeddate, addedtime = [], [], [], [], [], [], [], [], []
+    for i in gg:
+        content = studenttable.item(i)
+        pp = content['values']
+        id.append(pp[0]), name.append(pp[1]), mobile.append(pp[2]), email.append(pp[3]), address.append(pp[4]),
+        gender.append(pp[5]), dob.append(pp[6]), addeddate.append(pp[7]), addedtime.append(pp[8])
+    dd = ['Id', 'Name', 'Mobile', 'Email', 'Address', 'Gender', 'D.O.B', 'Addeddate', 'Addedtime']
+    df = pandas.DataFrame(list(zip( id, name, mobile, email, address, gender, dob, addeddate, addedtime)), columns=dd)
+    paths = r'{}.csv'.format(ff)
+    df.to_csv(paths, index=False)
+    messagebox.showinfo('Notifications', 'Student data is saved{}'.format(paths))
+
+
 
 def exit():
     print('student exit')
