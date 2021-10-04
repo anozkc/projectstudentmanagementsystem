@@ -1,6 +1,12 @@
 
 
 
+def exit():
+    print('student exit')
+    res = messagebox.askyesnocancel('Notification', 'Do you want to exit?')
+    if(res == True):
+        root.destroy()
+        print(res)
 
 
 ######################################################## CONNECT TO DATABASE   ###########################
