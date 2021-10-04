@@ -1,3 +1,137 @@
+def updatestudent():
+    def update():
+          id = idval.get()
+          name = nameval.get()
+          mobile = mobileval.get()
+          email = emailval.get()
+          gender = genderval.get()
+          address = addressval.get()
+          dob = dobval.get()
+
+          date = dateval.get()
+          time = timeval.get()
+
+          strr = 'update studentdata set name=%s,mobile=%s,email=%s,address=%s,gender=%s,dob=%s,date=%s,time=%s where id=%s'
+          mycursor.execute(strr,(name,mobile,email,address,gender,dob,date,time,id))
+          con.commit()
+          messagebox.showinfo("Notifications", 'Id {} Modified sucessfully.....'.format(id), parent=updateroot)
+          strr = 'select * from studentdata'
+          mycursor.execute(strr)
+          datas = mycursor.fetchall()
+          studenttable.delete(*studenttable.get_children())
+          for i in datas:
+              vv = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]]
+              print(vv)
+              studenttable.insert('', END, values=vv)
+
+    updateroot = Toplevel(master=DataEntryFrame)
+    updateroot.grab_set()
+    updateroot.geometry('600x650+600+50')
+    updateroot.title('Student Management System')
+    updateroot.iconbitmap('student.ico')
+    updateroot.resizable(False, False)
+    updateroot.config(bg='chartreuse4')
+    # --------------------------------------------Add update lables---------------------#####
+
+    idlabel = Label(updateroot, text='Update ID:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                   borderwidth=3, width=13, anchor='w')
+    idlabel.place(x=10, y=10)
+
+    namelabel = Label(updateroot, text='Update Name:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                      borderwidth=3, width=13, anchor='w')
+    namelabel.place(x=10, y=70)
+
+    mobilelabel = Label(updateroot, text='Update Mobile:', bg='khaki1', font=('Big Caslon', 20, 'bold'),
+                        relief=GROOVE,
+                        borderwidth=3, width=13, anchor='w')
+    mobilelabel.place(x=10, y=130)
+
+    emaillabel = Label(updateroot, text='Update Email:', bg='khaki1', font=('Big Caslon', 20, 'bold'),
+                       relief=GROOVE,
+                       borderwidth=3, width=13, anchor='w')
+    emaillabel.place(x=10, y=190)
+
+    addresslabel = Label(updateroot, text='Update Address:', bg='khaki1', font=('Big Caslon', 20, 'bold'),
+                         relief=GROOVE,
+                         borderwidth=3, width=13, anchor='w')
+    addresslabel.place(x=10, y=250)
+
+    genderlabel = Label(updateroot, text='Update Gender:', bg='khaki1', font=('Big Caslon', 20, 'bold'),
+                        relief=GROOVE,
+                        borderwidth=3, width=13, anchor='w')
+    genderlabel.place(x=10, y=310)
+
+    doblabel = Label(updateroot, text='Update D.O.B:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                     borderwidth=3, width=13, anchor='w')
+    doblabel.place(x=10, y=370)
+
+    datelabel = Label(updateroot, text='Update Date:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                      borderwidth=3, width=13, anchor='w')
+    datelabel.place(x=10, y=430)
+
+    timelabel = Label(updateroot, text='Update Date:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                      borderwidth=3, width=13, anchor='w')
+    timelabel.place(x=10, y=490)
+
+    # -------------------------------------------------------------Add student entry------------#######
+    idval = StringVar()
+    nameval = StringVar()
+    mobileval = StringVar()
+    emailval = StringVar()
+    genderval = StringVar()
+    addressval = StringVar()
+    dobval = StringVar()
+    dateval = StringVar()
+    timeval = StringVar()
+
+    identry = Entry(updateroot, font=('Big Caslon', 20, 'bold'), bd=5, text=idval)
+    identry.place(x=250, y=10)
+
+    nameentry = Entry(updateroot, font=('Big Caslon', 20, 'bold'), bd=5, text=nameval)
+    nameentry.place(x=250, y=70)
+
+    mobileentry = Entry(updateroot, font=('Big Caslon', 20, 'bold'), bd=5, text=mobileval)
+    mobileentry.place(x=250, y=130)
+
+    emailentry = Entry(updateroot, font=('Big Caslon', 20, 'bold'), bd=5, text=emailval)
+    emailentry.place(x=250, y=190)
+
+    addressentry = Entry(updateroot, font=('Big Caslon', 20, 'bold'), bd=5, text=addressval)
+    addressentry.place(x=250, y=250)
+
+    genderentry = Entry(updateroot, font=('Big Caslon', 20, 'bold'), bd=5, text=genderval)
+    genderentry.place(x=250, y=310)
+
+    dobentry = Entry(updateroot, font=('Big Caslon', 20, 'bold'), bd=5, text=dobval)
+    dobentry.place(x=250, y=370)
+
+    timeentry = Entry(updateroot, font=('Big Caslon', 20, 'bold'), bd=5, text=timeval)
+    timeentry.place(x=250, y=430)
+
+    dateentry = Entry(updateroot, font=('Big Caslon', 20, 'bold'), bd=5, text=dateval)
+    dateentry.place(x=250, y=490)
+    # _______________________________________________________Add button--_________________________#
+
+    submitbtn = Button(updateroot, text='Submit', relief=GROOVE, bd=5, font=('Big Caslon', 20, 'bold'), width=10,
+                       fg='black', bg='skyblue', activeforeground='white', activebackground='gold',
+                       command=update)
+    submitbtn.place(x=250, y=550)
+    cc = studenttable.focus()
+    content = studenttable.item(cc)
+    pp = content['values']
+    if (len(pp) != 0):
+        idval.set(pp[0])
+        nameval.set(pp[1])
+        mobileval.set(pp[2])
+        emailval.set(pp[3])
+        genderval.set(pp[4])
+        addressval.set(pp[5])
+        dobval.set(pp[6])
+        dateval.set(pp[7])
+        timeval.set(pp[8])
+
+    updateroot.mainloop()
+
 def showall():
     strr = 'select * from studentdata'
     mycursor.execute(strr)
