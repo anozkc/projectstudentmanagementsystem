@@ -1,3 +1,126 @@
+def addstudent():
+    def submitadd():
+        print('submitted')
+        id = idval.get()
+        name = nameval.get()
+        mobile = mobileval.get()
+        email = emailval.get()
+        gender = genderval.get()
+        address = addressval.get()
+        dob = dobval.get()
+        addedtime = time.strftime("%I:%M:%S(%p)")
+        addeddate = time.strftime("%d/%m/%Y")
+
+        try:
+
+            strr = 'insert into studentdata values(%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+            mycursor.execute(strr, (id, name, mobile, email, address, gender, dob, addeddate, addedtime))
+            con.commit()
+
+            res = messagebox.askyesnocancel('Notifications', 'Id {} Name {} added succesfully and want to clean the form'
+                                            .format(id, name), parent=addroot)
+
+
+
+            if(res==True):
+                idval.set('')
+                nameval.set('')
+                mobileval.set('')
+                emailval.set('')
+                genderval.set('')
+                addressval.set('')
+                dobval.set('')
+
+        except:
+            messagebox.showerror('Notification', 'Id already exists please try another id', parent=addroot)
+
+
+            strr = 'select *from studentdata'
+            mycursor.execute(strr)
+            datas = mycursor.fetchall()
+            print(datas)
+            studenttable.delete(*studenttable.get_children())
+
+            for i in datas:
+                vv = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]]
+                print(vv)
+                studenttable.insert('', END, values=vv)
+
+        print(addedtime)
+        print(addeddate)
+    addroot = Toplevel(master=DataEntryFrame)
+    addroot.grab_set()
+    addroot.geometry('570x490+220+200')
+    addroot.title('Student Management System')
+    addroot.iconbitmap('student.ico')
+    addroot.resizable(False, False)
+    addroot.config(bg='cornflower blue')
+#----------------------------------- add students labels------------------------------------#
+    idlabel = Label(addroot, text='Enter ID:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE, borderwidth=3
+                    , width=12, anchor='w')
+    idlabel.place(x=10, y=10)
+
+    namelabel = Label(addroot, text='Enter Name:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                    borderwidth=3, width=12, anchor='w')
+    namelabel.place(x=10, y=70)
+
+    mobilelabel = Label(addroot, text='Enter Mobile:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                    borderwidth=3, width=12, anchor='w')
+    mobilelabel.place(x=10, y=130)
+
+    emaillabel = Label(addroot, text='Enter Email:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                    borderwidth=3, width=12, anchor='w')
+    emaillabel.place(x=10, y=190)
+
+    addresslabel = Label(addroot, text='Enter Address:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                    borderwidth=3, width=12, anchor='w')
+    addresslabel.place(x=10, y=250)
+
+    genderlabel = Label(addroot, text='Enter Gender:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                    borderwidth=3, width=12, anchor='w')
+    genderlabel.place(x=10, y=310)
+
+    doblabel = Label(addroot, text='Enter D.O.B:', bg='khaki1', font=('Big Caslon', 20, 'bold'), relief=GROOVE,
+                    borderwidth=3, width=12, anchor='w')
+    doblabel.place(x=10, y=370)
+    #-------------------------------------------------------------Add student entry------------#######
+    idval = StringVar()
+    nameval = StringVar()
+    mobileval = StringVar()
+    emailval = StringVar()
+    genderval = StringVar()
+    addressval = StringVar()
+    dobval = StringVar()
+
+    identry = Entry(addroot, font=('Big Caslon', 20, 'bold'), bd=5, textvariable=idval)
+    identry.place(x=250, y=10)
+
+    nameentry = Entry(addroot, font=('Big Caslon', 20, 'bold'), bd=5, textvariable=nameval)
+    nameentry.place(x=250, y=70)
+
+
+    mobileentry = Entry(addroot, font=('Big Caslon', 20, 'bold'), bd=5, textvariable=mobileval)
+    mobileentry.place(x=250, y=130)
+
+    emailentry = Entry(addroot, font=('Big Caslon', 20, 'bold'), bd=5, textvariable=emailval)
+    emailentry.place(x=250, y=190)
+
+    addressentry = Entry(addroot, font=('Big Caslon', 20, 'bold'), bd=5, textvariable=addressval)
+    addressentry.place(x=250, y=250)
+
+    genderentry = Entry(addroot, font=('Big Caslon', 20, 'bold'), bd=5, textvariable=genderval)
+    genderentry.place(x=250, y=310)
+
+    dobentry = Entry(addroot, font=('Big Caslon', 20, 'bold'), bd=5, textvariable=dobval)
+    dobentry.place(x=250, y=370)
+    #_______________________________________________________Add button--_________________________#
+
+
+    submitbtn = Button(addroot, text='Submit', relief=GROOVE, bd=5, font=('Big Caslon', 20, 'bold'), width=10,
+                       fg='black', bg='burlywood4', activeforeground='white', activebackground='gold', command=submitadd)
+    submitbtn.place(x=150, y=420)
+
+    addroot.mainloop()
 def searchstudent():
     print('student searched')
     def search():
