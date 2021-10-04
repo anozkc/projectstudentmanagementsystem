@@ -1,4 +1,12 @@
-
+def showall():
+    strr = 'select * from studentdata'
+    mycursor.execute(strr)
+    datas = mycursor.fetchall()
+    studenttable.delete(*studenttable.get_children())
+    for i in datas:
+        vv = [i[0], i[1], i[2], i[3], i[4], i[5], i[6], i[7], i[8]]
+        print(vv)
+        studenttable.insert('', END, values=vv)
 
 def exportall():
     ff = filedialog.asksaveasfilename()
